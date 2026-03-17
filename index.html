@@ -23,54 +23,31 @@ canvas{
     opacity:0.2;
 }
 
-/* CENTER */
+/* CENTER PERFECT */
 .container{
-    height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
     text-align:center;
-    padding:20px;
+    width:90%;
 }
 
 /* TEXT */
-h1{
-    font-size:40px;
-    margin-bottom:10px;
+h1{font-size:38px;margin:10px}
+h2{font-size:20px;margin:10px;opacity:0.8}
+p{max-width:500px;margin:auto;opacity:0.7}
+
+/* CURSOR */
+.cursor{
+    display:inline-block;
+    width:10px;
+    background:#00ffcc;
+    animation:blink 1s infinite;
 }
 
-h2{
-    font-size:20px;
-    margin-bottom:20px;
-    opacity:0.8;
-}
-
-p{
-    max-width:500px;
-    opacity:0.7;
-}
-
-/* ANIMATION */
-.fade{
-    animation:fade 2s ease;
-}
-
-@keyframes fade{
-    from{opacity:0; transform:translateY(20px)}
-    to{opacity:1; transform:translateY(0)}
-}
-
-/* BUTTON */
-button{
-    position:fixed;
-    top:10px;
-    right:10px;
-    background:black;
-    color:#00ffcc;
-    border:1px solid #00ffcc;
-    padding:5px 10px;
-    cursor:pointer;
+@keyframes blink{
+    50%{opacity:0}
 }
 
 /* MOBILE */
@@ -85,41 +62,53 @@ button{
 <!-- MATRIX -->
 <canvas id="matrix"></canvas>
 
-<!-- MUSIC -->
-<audio id="bgm" loop>
-    <source src="kuy.mp3" type="audio/mpeg">
+<!-- AUDIO (NO UI) -->
+<audio id="bgm" loop preload="auto" style="display:none">
+    <source src="video.webm" type="audio/webm">
 </audio>
-
-<button onclick="toggleMusic()">MUSIC</button>
 
 <!-- CONTENT -->
 <div class="container">
-    <h1 class="fade">Hi, I am vynxidn</h1>
-    <h2 class="fade">Welcome to my profile</h2>
-    <p class="fade">
-        "tetap rendah hati guys, yang tinggi soalnya langit"
-    </p>
+    <h1 id="line1"></h1>
+    <h2 id="line2"></h2>
+    <p id="line3"></p>
 </div>
 
 <script>
 
-/* ===== MUSIC FIX AUTOPLAY ===== */
-document.addEventListener("click", function(){
+/* ================= AUDIO (NO UI) ================= */
+document.addEventListener("click", ()=>{
     let audio = document.getElementById("bgm")
-    audio.volume = 0.3
-    audio.play()
-}, { once:true })
+    audio.volume = 0.9
+    audio.play().catch(()=>{})
+}, {once:true})
 
-function toggleMusic(){
-    let audio = document.getElementById("bgm")
-    if(audio.paused){
-        audio.play()
-    } else {
-        audio.pause()
+/* ================= TYPING ================= */
+function typeText(element, text, speed, callback){
+    let i = 0
+    function typing(){
+        if(i < text.length){
+            element.innerHTML += text.charAt(i)
+            i++
+            setTimeout(typing, speed)
+        } else if(callback){
+            callback()
+        }
     }
+    typing()
 }
 
-/* ===== MATRIX ===== */
+let l1 = document.getElementById("line1")
+let l2 = document.getElementById("line2")
+let l3 = document.getElementById("line3")
+
+typeText(l1, "Hi, I am vynxidn", 60, ()=>{
+    typeText(l2, "Welcome to my profile", 50, ()=>{
+        typeText(l3, '"tetap rendah hati guys, yang tinggi soalnya langit"', 40)
+    })
+})
+
+/* ================= MATRIX ================= */
 let c=document.getElementById("matrix")
 let ctx=c.getContext("2d")
 
@@ -158,7 +147,6 @@ function draw(){
 
     requestAnimationFrame(draw)
 }
-
 draw()
 
 </script>
