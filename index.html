@@ -3,6 +3,136 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>vynxidn</title>
+
+<style>
+body{
+    margin:0;
+    background:black;
+    color:#00ffcc;
+    font-family:monospace;
+    overflow:hidden;
+}
+
+/* MATRIX */
+canvas{
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:-1;
+    opacity:0.2;
+}
+
+/* CENTER */
+.container{
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:20px;
+}
+
+/* TEXT */
+h1{
+    font-size:40px;
+    margin-bottom:10px;
+}
+
+h2{
+    font-size:20px;
+    margin-bottom:20px;
+    opacity:0.8;
+}
+
+p{
+    max-width:500px;
+    opacity:0.7;
+}
+
+/* ANIMATION */
+.fade{
+    animation:fade 2s ease;
+}
+
+@keyframes fade{
+    from{opacity:0; transform:translateY(20px)}
+    to{opacity:1; transform:translateY(0)}
+}
+
+/* MOBILE */
+@media(max-width:600px){
+    h1{font-size:28px}
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="matrix"></canvas>
+
+<div class="container">
+    <h1 class="fade">Hi, I am vynxidn</h1>
+    <h2 class="fade">Welcome to my profile</h2>
+    <p class="fade">
+        "tetap rendah hati guys, yang tinggi soalnya langit"
+    </p>
+</div>
+
+<script>
+/* MATRIX SIMPLE */
+let c=document.getElementById("matrix")
+let ctx=c.getContext("2d")
+
+c.width=window.innerWidth
+c.height=window.innerHeight
+
+let letters="01"
+letters=letters.split("")
+
+let font=14
+let columns=c.width/font
+let drops=[]
+
+for(let i=0;i<columns;i++) drops[i]=1
+
+function draw(){
+ctx.fillStyle="rgba(0,0,0,0.05)"
+ctx.fillRect(0,0,c.width,c.height)
+
+ctx.fillStyle="#0f0"
+ctx.font=font+"px monospace"
+
+for(let i=0;i<drops.length;i++){
+let text=letters[Math.floor(Math.random()*letters.length)]
+ctx.fillText(text,i*font,drops[i]*font)
+
+if(drops[i]*font>c.height && Math.random()>0.95){
+drops[i]=0
+}
+
+drops[i]++
+}
+
+requestAnimationFrame(draw)
+}
+
+draw()
+
+/* RESIZE FIX */
+window.addEventListener("resize",()=>{
+c.width=window.innerWidth
+c.height=window.innerHeight
+})
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cyber System</title>
 
 <style>
