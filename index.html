@@ -33,6 +33,259 @@ canvas{
     max-width:800px;
 }
 
+/* TEXT ATAS */
+h1{font-size:clamp(24px,5vw,40px);margin:10px;text-align:center}
+h2{font-size:clamp(14px,3vw,20px);margin:10px;text-align:center;opacity:0.8}
+p{font-size:clamp(12px,2.5vw,16px);margin:10px;text-align:center;opacity:0.7}
+
+/* TERMINAL BOX */
+.terminal-box{
+    margin-top:20px;
+    border:1px solid #00ffcc;
+    border-radius:10px;
+    padding:15px;
+    background:rgba(0,0,0,0.6);
+    box-shadow:0 0 15px #00ffcc33;
+}
+
+/* TERMINAL TEXT */
+#terminal{
+    font-size:clamp(12px,2.5vw,15px);
+    white-space:pre-wrap;
+    overflow-y:auto;
+    max-height:60vh;
+    line-height:1.5;
+}
+
+/* SCROLL */
+#terminal::-webkit-scrollbar{
+    width:5px;
+}
+#terminal::-webkit-scrollbar-thumb{
+    background:#00ffcc;
+}
+
+/* MUSIC BUTTON */
+.music-btn{
+    position:fixed;
+    top:15px;
+    right:15px;
+    background:rgba(0,0,0,0.5);
+    border:1px solid #00ffcc;
+    color:#00ffcc;
+    padding:8px 12px;
+    cursor:pointer;
+    border-radius:8px;
+    font-size:18px;
+    z-index:10;
+    transition:0.3s;
+}
+.music-btn:hover{
+    background:#00ffcc;
+    color:black;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="matrix"></canvas>
+
+<!-- AUDIO -->
+<audio id="bgm" loop preload="auto">
+    <source src="video.webm" type="audio/webm">
+</audio>
+
+<!-- BUTTON -->
+<div class="music-btn" id="musicBtn">🔇</div>
+
+<div class="container">
+
+    <!-- TEXT ANIMASI -->
+    <h1 id="line1"></h1>
+    <h2 id="line2"></h2>
+    <p id="line3"></p>
+
+    <!-- TERMINAL -->
+    <div class="terminal-box">
+        <div id="terminal"></div>
+    </div>
+
+</div>
+
+<script>
+
+/* ================= AUDIO ================= */
+let audio = document.getElementById("bgm")
+let btn = document.getElementById("musicBtn")
+let audioStarted = false
+
+function startAudio(){
+    if(!audioStarted){
+        audioStarted = true
+        audio.volume = 0
+
+        audio.play().catch(()=>{})
+        btn.innerHTML = "🔊"
+
+        // fade in
+        let vol = 0
+        let fade = setInterval(()=>{
+            if(vol < 0.9){
+                vol += 0.05
+                audio.volume = vol
+            }else{
+                clearInterval(fade)
+            }
+        },100)
+    }
+}
+
+/* trigger saat user interaksi */
+["click","touchstart","scroll","mousemove"].forEach(evt=>{
+    document.addEventListener(evt, startAudio, {once:true})
+})
+
+/* toggle tombol */
+btn.addEventListener("click", ()=>{
+    if(audio.paused){
+        audio.play()
+        btn.innerHTML = "🔊"
+    }else{
+        audio.pause()
+        btn.innerHTML = "🔇"
+    }
+})
+
+/* ================= TYPING ATAS ================= */
+function typeText(element, text, speed, triggerIndex, callback){
+    let i = 0
+
+    function typing(){
+        if(i < text.length){
+
+            element.innerHTML += text.charAt(i)
+
+            if(i === triggerIndex){
+                startAudio()
+            }
+
+            i++
+            setTimeout(typing, speed)
+
+        } else if(callback){
+            callback()
+        }
+    }
+
+    typing()
+}
+
+/* LOOP TEXT ATAS */
+function startTyping(){
+    line1.innerHTML=""
+    line2.innerHTML=""
+    line3.innerHTML=""
+
+    typeText(line1,"Hi, I am vynxidn",60,6,()=>{
+        typeText(line2,"Welcome to my profile",50,5,()=>{
+            typeText(line3,'"tetap rendah hati guys, yang tinggi soalnya langit"',40,10,()=>{
+                setTimeout(startTyping,2000)
+            })
+        })
+    })
+}
+startTyping()
+
+/* ================= LOAD STORY ================= */
+async function loadTextFile(){
+    try{
+        let res = await fetch("story.txt")
+        let text = await res.text()
+
+        document.getElementById("terminal").textContent = text
+
+    }catch(e){
+        document.getElementById("terminal").textContent = "gagal load story.txt..."
+    }
+}
+loadTextFile()
+
+/* ================= MATRIX ================= */
+let c=document.getElementById("matrix")
+let ctx=c.getContext("2d")
+
+function resize(){
+    c.width=window.innerWidth
+    c.height=window.innerHeight
+}
+resize()
+window.addEventListener("resize", resize)
+
+let letters="01".split("")
+let font=14
+let columns=Math.floor(c.width/font)
+let drops=Array(columns).fill(1)
+
+function draw(){
+    ctx.fillStyle="rgba(0,0,0,0.05)"
+    ctx.fillRect(0,0,c.width,c.height)
+
+    ctx.fillStyle="#0f0"
+    ctx.font=font+"px monospace"
+
+    for(let i=0;i<drops.length;i++){
+        let text=letters[Math.random()>0.5?0:1]
+        ctx.fillText(text,i*font,drops[i]*font)
+
+        if(drops[i]*font>c.height && Math.random()>0.95){
+            drops[i]=0
+        }
+        drops[i]++
+    }
+
+    requestAnimationFrame(draw)
+}
+draw()
+
+</script>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>vynxidn</title>
+
+<style>
+body{
+    margin:0;
+    background:black;
+    color:#00ffcc;
+    font-family:monospace;
+    overflow:hidden;
+}
+
+/* MATRIX */
+canvas{
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:-1;
+    opacity:0.15;
+}
+
+/* CONTAINER */
+.container{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%, -50%);
+    width:95%;
+    max-width:800px;
+}
+
 /* TERMINAL BOX */
 .terminal-box{
     border:1px solid #00ffcc;
