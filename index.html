@@ -1,34 +1,35 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portofolio Saya</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <!-- Header -->
-    <header>
-        <h1>Nama Anda</h1>
-        <nav>
-            <a href="#about">Tentang</a>
-            <a href="#projects">Proyek</a><!DOCTYPE html>
-<html lang="id">
-<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cyber God Mode</title>
+<title>Cyber System</title>
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:monospace}
-body{background:black;color:#00ffcc;overflow:hidden}
+:root{
+    --main:#00ffcc;
+    --bg:#050505;
+}
 
-/* MATRIX CANVAS */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:monospace;
+}
+
+body{
+    background:var(--bg);
+    color:var(--main);
+}
+
+/* MATRIX */
 canvas{
     position:fixed;
     top:0;
     left:0;
     z-index:-1;
+    opacity:0.2;
 }
 
 /* HEADER */
@@ -36,28 +37,35 @@ header{
     display:flex;
     justify-content:space-between;
     padding:15px;
-    border-bottom:1px solid #00ffcc;
-    backdrop-filter: blur(5px);
+    border-bottom:1px solid var(--main);
+    position:sticky;
+    top:0;
+    background:rgba(0,0,0,0.7);
 }
 
+/* NAV */
 nav a{
     margin:0 10px;
     cursor:pointer;
-    text-decoration:none;
-    color:#00ffcc;
 }
 
-nav a:hover{color:white}
-
 /* PAGE */
-.page{display:none;padding:30px}
+.page{
+    display:none;
+    padding:20px;
+    max-width:900px;
+    margin:auto;
+}
 .active{display:block}
 
 /* HERO */
-.hero{text-align:center;margin-top:80px}
+.hero{
+    text-align:center;
+    margin-top:80px;
+}
+
 .glitch{
-    font-size:50px;
-    position:relative;
+    font-size:40px;
     animation:glitch 1s infinite;
 }
 
@@ -67,41 +75,41 @@ nav a:hover{color:white}
     100%{text-shadow:2px 0 red}
 }
 
-/* PROJECT */
+/* CARD */
 .grid{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-    gap:20px;
+    gap:15px;
 }
 .card{
-    border:1px solid #00ffcc;
+    border:1px solid var(--main);
     padding:15px;
-    background:rgba(0,0,0,0.6);
+    transition:0.3s;
+}
+.card:hover{
+    background:rgba(0,255,200,0.1);
 }
 
 /* TERMINAL */
 .terminal{
     height:250px;
-    border:1px solid #00ffcc;
     overflow:auto;
+    border:1px solid var(--main);
     padding:10px;
+    margin-bottom:10px;
     background:black;
 }
 
 input{
     width:100%;
     background:black;
-    border:none;
-    color:#00ffcc;
+    border:1px solid var(--main);
+    padding:5px;
+    color:var(--main);
 }
 
-/* STATUS */
-.status{
-    position:fixed;
-    bottom:10px;
-    right:10px;
-    font-size:12px;
-    opacity:0.7;
+/* MOBILE */
+@media(max-width:600px){
+    .glitch{font-size:25px}
 }
 </style>
 </head>
@@ -111,201 +119,125 @@ input{
 <canvas id="matrix"></canvas>
 
 <header>
-<h2>vynxidn.exe</h2>
+<h3>vynxidn.sys</h3>
 <nav>
 <a onclick="nav('home')">Home</a>
-<a onclick="nav('about')">About</a>
 <a onclick="nav('projects')">Projects</a>
 <a onclick="nav('terminal')">Terminal</a>
-<a onclick="nav('scan')">Scan</a>
 </nav>
 </header>
 
-<!-- HOME -->
 <div id="home" class="page active">
 <div class="hero">
-<h1 class="glitch">SYSTEM ACTIVE</h1>
+<h1 class="glitch">SYSTEM ONLINE</h1>
 <p id="typing"></p>
 </div>
 </div>
 
-<!-- ABOUT -->
-<div id="about" class="page">
-<h2>About</h2>
-<p>Cyber developer exploring AI, hacking, and system logic.</p>
-</div>
-
-<!-- PROJECT -->
 <div id="projects" class="page">
 <h2>Projects</h2>
 <div class="grid">
-<div class="card">Scanner Tool</div>
-<div class="card">Cyber Dashboard</div>
-<div class="card">AI Analyzer</div>
+<div class="card">Scanner AI</div>
+<div class="card">Cyber UI</div>
 </div>
 </div>
 
-<!-- TERMINAL -->
 <div id="terminal" class="page">
 <h2>Terminal</h2>
-<div class="terminal" id="out"></div>
-<input id="cmd" onkeydown="terminal(event)" placeholder="type command...">
+<div id="out" class="terminal"></div>
+<input id="cmd" placeholder="type command..." onkeydown="run(event)">
 </div>
-
-<!-- SCAN -->
-<div id="scan" class="page">
-<h2>Scanning System...</h2>
-<div id="scanlog"></div>
-</div>
-
-<div class="status" id="status">SYSTEM READY</div>
 
 <script>
 
-/* NAVIGATION */
+/* NAV + HASH ROUTER */
 function nav(id){
-document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'))
-document.getElementById(id).classList.add('active')
+    location.hash = id
+}
+
+function loadPage(){
+    let page = location.hash.replace("#","") || "home"
+    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'))
+    document.getElementById(page)?.classList.add('active')
+}
+window.addEventListener("hashchange",loadPage)
+loadPage()
+
+/* SAFE OUTPUT */
+function print(text){
+    let div = document.createElement("div")
+    div.textContent = text
+    document.getElementById("out").appendChild(div)
+}
+
+/* TERMINAL */
+function run(e){
+if(e.key==="Enter"){
+let input = document.getElementById("cmd")
+let cmd = input.value.trim()
+
+print("> "+cmd)
+
+if(cmd==="help"){
+print("help, about, clear")
+}
+else if(cmd==="about"){
+print("Cyber Engine v2")
+}
+else if(cmd==="clear"){
+document.getElementById("out").innerHTML=""
+}
+else{
+print("unknown command")
+}
+
+input.value=""
+}
 }
 
 /* TYPING */
-let text="Initializing cyber system..."
+let txt="Booting secure cyber interface..."
 let i=0
 function type(){
-if(i<text.length){
-document.getElementById("typing").innerHTML+=text[i]
-i++
-setTimeout(type,50)
+if(i<txt.length){
+document.getElementById("typing").innerText+=txt[i++]
+setTimeout(type,40)
 }
 }
 type()
 
-/* MATRIX */
-let canvas=document.getElementById("matrix")
-let ctx=canvas.getContext("2d")
-canvas.height=window.innerHeight
-canvas.width=window.innerWidth
+/* OPTIMIZED MATRIX */
+let c=document.getElementById("matrix")
+let ctx=c.getContext("2d")
 
-let letters="01ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-letters=letters.split("")
+function resize(){
+c.width=window.innerWidth
+c.height=window.innerHeight
+}
+resize()
+window.addEventListener("resize",resize)
 
-let font=14
-let columns=canvas.width/font
-let drops=[]
-
-for(let x=0;x<columns;x++) drops[x]=1
+let cols=100
+let drops=Array(cols).fill(1)
 
 function draw(){
-ctx.fillStyle="rgba(0,0,0,0.05)"
-ctx.fillRect(0,0,canvas.width,canvas.height)
+ctx.fillStyle="rgba(0,0,0,0.1)"
+ctx.fillRect(0,0,c.width,c.height)
 
 ctx.fillStyle="#0f0"
-ctx.font=font+"px monospace"
-
 for(let i=0;i<drops.length;i++){
-let text=letters[Math.floor(Math.random()*letters.length)]
-ctx.fillText(text,i*font,drops[i]*font)
+let x=i*15
+let y=drops[i]*15
+ctx.fillText(Math.random()>0.5?"0":"1",x,y)
 
-if(drops[i]*font>canvas.height && Math.random()>0.975)
-drops[i]=0
-
+if(y>c.height) drops[i]=0
 drops[i]++
 }
+requestAnimationFrame(draw)
 }
-setInterval(draw,33)
-
-/* TERMINAL */
-function terminal(e){
-if(e.key==="Enter"){
-let input=document.getElementById("cmd")
-let out=document.getElementById("out")
-
-let cmd=input.value
-out.innerHTML+="<div>> "+cmd+"</div>"
-
-switch(cmd){
-case "help":
-out.innerHTML+="<div>help about scan clear</div>"
-break
-case "about":
-out.innerHTML+="<div>Cyber System v1.0</div>"
-break
-case "scan":
-nav('scan')
-startScan()
-break
-case "clear":
-out.innerHTML=""
-break
-default:
-out.innerHTML+="<div>unknown command</div>"
-}
-
-input.value=""
-out.scrollTop=out.scrollHeight
-}
-}
-
-/* FAKE SCAN */
-function startScan(){
-let log=document.getElementById("scanlog")
-log.innerHTML=""
-let steps=[
-"Initializing...",
-"Scanning ports...",
-"Bypassing firewall...",
-"Injecting payload...",
-"Access granted"
-]
-
-let i=0
-let interval=setInterval(()=>{
-log.innerHTML+="<div>"+steps[i]+"</div>"
-i++
-if(i>=steps.length) clearInterval(interval)
-},800)
-}
-
-/* STATUS */
-setInterval(()=>{
-let s=document.getElementById("status")
-let states=["CONNECTED","SECURE","MONITORING","ACTIVE"]
-s.innerText=states[Math.floor(Math.random()*states.length)]
-},2000)
+draw()
 
 </script>
 
-</body>
-</html>
-            <a href="#contact">Kontak</a>
-        </nav>
-    </header>
-
-    <!-- Hero Section -->
-    <section id="about" class="hero">
-        <h2>Halo, Saya [Nama Anda]</h2>
-        <p>Web Developer & Designer</p>
-    </section>
-
-    <!-- Projects Section -->
-    <section id="projects">
-        <h2>Proyek Terbaik</h2>
-        <div class="project-grid">
-            <div class="project-card">
-                <h3>Proyek 1</h3>
-                <p>Deskripsi singkat proyek menggunakan HTML/CSS.</p>
-            </div>
-            <div class="project-card">
-                <h3>Proyek 2</h3>
-                <p>Deskripsi singkat proyek kedua.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact">
-        <h2>Hubungi Saya</h2>
-        <p>Email: emailanda@example.com</p>
-    </section>
 </body>
 </html>
