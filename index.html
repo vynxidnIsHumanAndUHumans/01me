@@ -61,6 +61,18 @@ p{
     to{opacity:1; transform:translateY(0)}
 }
 
+/* BUTTON */
+button{
+    position:fixed;
+    top:10px;
+    right:10px;
+    background:black;
+    color:#00ffcc;
+    border:1px solid #00ffcc;
+    padding:5px 10px;
+    cursor:pointer;
+}
+
 /* MOBILE */
 @media(max-width:600px){
     h1{font-size:28px}
@@ -70,8 +82,17 @@ p{
 
 <body>
 
+<!-- MATRIX -->
 <canvas id="matrix"></canvas>
 
+<!-- MUSIC -->
+<audio id="bgm" loop>
+    <source src="kuy.mp3" type="audio/mpeg">
+</audio>
+
+<button onclick="toggleMusic()">MUSIC</button>
+
+<!-- CONTENT -->
 <div class="container">
     <h1 class="fade">Hi, I am vynxidn</h1>
     <h2 class="fade">Welcome to my profile</h2>
@@ -81,12 +102,33 @@ p{
 </div>
 
 <script>
-/* MATRIX SIMPLE */
+
+/* ===== MUSIC FIX AUTOPLAY ===== */
+document.addEventListener("click", function(){
+    let audio = document.getElementById("bgm")
+    audio.volume = 0.3
+    audio.play()
+}, { once:true })
+
+function toggleMusic(){
+    let audio = document.getElementById("bgm")
+    if(audio.paused){
+        audio.play()
+    } else {
+        audio.pause()
+    }
+}
+
+/* ===== MATRIX ===== */
 let c=document.getElementById("matrix")
 let ctx=c.getContext("2d")
 
-c.width=window.innerWidth
-c.height=window.innerHeight
+function resize(){
+    c.width=window.innerWidth
+    c.height=window.innerHeight
+}
+resize()
+window.addEventListener("resize", resize)
 
 let letters="01"
 letters=letters.split("")
@@ -98,284 +140,27 @@ let drops=[]
 for(let i=0;i<columns;i++) drops[i]=1
 
 function draw(){
-ctx.fillStyle="rgba(0,0,0,0.05)"
-ctx.fillRect(0,0,c.width,c.height)
+    ctx.fillStyle="rgba(0,0,0,0.05)"
+    ctx.fillRect(0,0,c.width,c.height)
 
-ctx.fillStyle="#0f0"
-ctx.font=font+"px monospace"
+    ctx.fillStyle="#0f0"
+    ctx.font=font+"px monospace"
 
-for(let i=0;i<drops.length;i++){
-let text=letters[Math.floor(Math.random()*letters.length)]
-ctx.fillText(text,i*font,drops[i]*font)
+    for(let i=0;i<drops.length;i++){
+        let text=letters[Math.floor(Math.random()*letters.length)]
+        ctx.fillText(text,i*font,drops[i]*font)
 
-if(drops[i]*font>c.height && Math.random()>0.95){
-drops[i]=0
-}
+        if(drops[i]*font>c.height && Math.random()>0.95){
+            drops[i]=0
+        }
+        drops[i]++
+    }
 
-drops[i]++
-}
-
-requestAnimationFrame(draw)
+    requestAnimationFrame(draw)
 }
 
 draw()
 
-/* RESIZE FIX */
-window.addEventListener("resize",()=>{
-c.width=window.innerWidth
-c.height=window.innerHeight
-})
-</script>
-<audio id="bgm" autoplay loop>
-    <source src="kuy.mp3" type="audio/mpeg">
-</audio>
-
-</body>
-</html><!DOCTYPE html>
-<html lang="id">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cyber System</title>
-
-<style>
-:root{
-    --main:#00ffcc;
-    --bg:#050505;
-}
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:monospace;
-}
-
-body{
-    background:var(--bg);
-    color:var(--main);
-}
-
-/* MATRIX */
-canvas{
-    position:fixed;
-    top:0;
-    left:0;
-    z-index:-1;
-    opacity:0.2;
-}
-
-/* HEADER */
-header{
-    display:flex;
-    justify-content:space-between;
-    padding:15px;
-    border-bottom:1px solid var(--main);
-    position:sticky;
-    top:0;
-    background:rgba(0,0,0,0.7);
-}
-
-/* NAV */
-nav a{
-    margin:0 10px;
-    cursor:pointer;
-}
-
-/* PAGE */
-.page{
-    display:none;
-    padding:20px;
-    max-width:900px;
-    margin:auto;
-}
-.active{display:block}
-
-/* HERO */
-.hero{
-    text-align:center;
-    margin-top:80px;
-}
-
-.glitch{
-    font-size:40px;
-    animation:glitch 1s infinite;
-}
-
-@keyframes glitch{
-    0%{text-shadow:2px 0 red}
-    50%{text-shadow:-2px 0 blue}
-    100%{text-shadow:2px 0 red}
-}
-
-/* CARD */
-.grid{
-    display:grid;
-    gap:15px;
-}
-.card{
-    border:1px solid var(--main);
-    padding:15px;
-    transition:0.3s;
-}
-.card:hover{
-    background:rgba(0,255,200,0.1);
-}
-
-/* TERMINAL */
-.terminal{
-    height:250px;
-    overflow:auto;
-    border:1px solid var(--main);
-    padding:10px;
-    margin-bottom:10px;
-    background:black;
-}
-
-input{
-    width:100%;
-    background:black;
-    border:1px solid var(--main);
-    padding:5px;
-    color:var(--main);
-}
-
-/* MOBILE */
-@media(max-width:600px){
-    .glitch{font-size:25px}
-}
-</style>
-</head>
-
-<body>
-
-<canvas id="matrix"></canvas>
-
-<header>
-<h3>vynxidn.sys</h3>
-<nav>
-<a onclick="nav('home')">Home</a>
-<a onclick="nav('projects')">Projects</a>
-<a onclick="nav('terminal')">Terminal</a>
-</nav>
-</header>
-
-<div id="home" class="page active">
-<div class="hero">
-<h1 class="glitch">SYSTEM ONLINE</h1>
-<p id="typing"></p>
-</div>
-</div>
-
-<div id="projects" class="page">
-<h2>Projects</h2>
-<div class="grid">
-<div class="card">Scanner AI</div>
-<div class="card">Cyber UI</div>
-</div>
-</div>
-
-<div id="terminal" class="page">
-<h2>Terminal</h2>
-<div id="out" class="terminal"></div>
-<input id="cmd" placeholder="type command..." onkeydown="run(event)">
-</div>
-
-<script>
-
-/* NAV + HASH ROUTER */
-function nav(id){
-    location.hash = id
-}
-
-function loadPage(){
-    let page = location.hash.replace("#","") || "home"
-    document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'))
-    document.getElementById(page)?.classList.add('active')
-}
-window.addEventListener("hashchange",loadPage)
-loadPage()
-
-/* SAFE OUTPUT */
-function print(text){
-    let div = document.createElement("div")
-    div.textContent = text
-    document.getElementById("out").appendChild(div)
-}
-
-/* TERMINAL */
-function run(e){
-if(e.key==="Enter"){
-let input = document.getElementById("cmd")
-let cmd = input.value.trim()
-
-print("> "+cmd)
-
-if(cmd==="help"){
-print("help, about, clear")
-}
-else if(cmd==="about"){
-print("Cyber Engine v2")
-}
-else if(cmd==="clear"){
-document.getElementById("out").innerHTML=""
-}
-else{
-print("unknown command")
-}
-
-input.value=""
-}
-}
-
-/* TYPING */
-let txt="Booting secure cyber interface..."
-let i=0
-function type(){
-if(i<txt.length){
-document.getElementById("typing").innerText+=txt[i++]
-setTimeout(type,40)
-}
-}
-type()
-
-/* OPTIMIZED MATRIX */
-let c=document.getElementById("matrix")
-let ctx=c.getContext("2d")
-
-function resize(){
-c.width=window.innerWidth
-c.height=window.innerHeight
-}
-resize()
-window.addEventListener("resize",resize)
-
-let cols=100
-let drops=Array(cols).fill(1)
-
-function draw(){
-ctx.fillStyle="rgba(0,0,0,0.1)"
-ctx.fillRect(0,0,c.width,c.height)
-
-ctx.fillStyle="#0f0"
-for(let i=0;i<drops.length;i++){
-let x=i*15
-let y=drops[i]*15
-ctx.fillText(Math.random()>0.5?"0":"1",x,y)
-
-if(y>c.height) drops[i]=0
-drops[i]++
-}
-requestAnimationFrame(draw)
-}
-draw()
-
-</script>
-<script>
-document.addEventListener("click", function(){
-    let audio = document.getElementById("bgm")
-    audio.play()
-}, { once: true })
 </script>
 
 </body>
