@@ -12,7 +12,271 @@
         <h1>Nama Anda</h1>
         <nav>
             <a href="#about">Tentang</a>
-            <a href="#projects">Proyek</a>
+            <a href="#projects">Proyek</a><!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cyber God Mode</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:monospace}
+body{background:black;color:#00ffcc;overflow:hidden}
+
+/* MATRIX CANVAS */
+canvas{
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:-1;
+}
+
+/* HEADER */
+header{
+    display:flex;
+    justify-content:space-between;
+    padding:15px;
+    border-bottom:1px solid #00ffcc;
+    backdrop-filter: blur(5px);
+}
+
+nav a{
+    margin:0 10px;
+    cursor:pointer;
+    text-decoration:none;
+    color:#00ffcc;
+}
+
+nav a:hover{color:white}
+
+/* PAGE */
+.page{display:none;padding:30px}
+.active{display:block}
+
+/* HERO */
+.hero{text-align:center;margin-top:80px}
+.glitch{
+    font-size:50px;
+    position:relative;
+    animation:glitch 1s infinite;
+}
+
+@keyframes glitch{
+    0%{text-shadow:2px 0 red}
+    50%{text-shadow:-2px 0 blue}
+    100%{text-shadow:2px 0 red}
+}
+
+/* PROJECT */
+.grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:20px;
+}
+.card{
+    border:1px solid #00ffcc;
+    padding:15px;
+    background:rgba(0,0,0,0.6);
+}
+
+/* TERMINAL */
+.terminal{
+    height:250px;
+    border:1px solid #00ffcc;
+    overflow:auto;
+    padding:10px;
+    background:black;
+}
+
+input{
+    width:100%;
+    background:black;
+    border:none;
+    color:#00ffcc;
+}
+
+/* STATUS */
+.status{
+    position:fixed;
+    bottom:10px;
+    right:10px;
+    font-size:12px;
+    opacity:0.7;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="matrix"></canvas>
+
+<header>
+<h2>vynxidn.exe</h2>
+<nav>
+<a onclick="nav('home')">Home</a>
+<a onclick="nav('about')">About</a>
+<a onclick="nav('projects')">Projects</a>
+<a onclick="nav('terminal')">Terminal</a>
+<a onclick="nav('scan')">Scan</a>
+</nav>
+</header>
+
+<!-- HOME -->
+<div id="home" class="page active">
+<div class="hero">
+<h1 class="glitch">SYSTEM ACTIVE</h1>
+<p id="typing"></p>
+</div>
+</div>
+
+<!-- ABOUT -->
+<div id="about" class="page">
+<h2>About</h2>
+<p>Cyber developer exploring AI, hacking, and system logic.</p>
+</div>
+
+<!-- PROJECT -->
+<div id="projects" class="page">
+<h2>Projects</h2>
+<div class="grid">
+<div class="card">Scanner Tool</div>
+<div class="card">Cyber Dashboard</div>
+<div class="card">AI Analyzer</div>
+</div>
+</div>
+
+<!-- TERMINAL -->
+<div id="terminal" class="page">
+<h2>Terminal</h2>
+<div class="terminal" id="out"></div>
+<input id="cmd" onkeydown="terminal(event)" placeholder="type command...">
+</div>
+
+<!-- SCAN -->
+<div id="scan" class="page">
+<h2>Scanning System...</h2>
+<div id="scanlog"></div>
+</div>
+
+<div class="status" id="status">SYSTEM READY</div>
+
+<script>
+
+/* NAVIGATION */
+function nav(id){
+document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'))
+document.getElementById(id).classList.add('active')
+}
+
+/* TYPING */
+let text="Initializing cyber system..."
+let i=0
+function type(){
+if(i<text.length){
+document.getElementById("typing").innerHTML+=text[i]
+i++
+setTimeout(type,50)
+}
+}
+type()
+
+/* MATRIX */
+let canvas=document.getElementById("matrix")
+let ctx=canvas.getContext("2d")
+canvas.height=window.innerHeight
+canvas.width=window.innerWidth
+
+let letters="01ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+letters=letters.split("")
+
+let font=14
+let columns=canvas.width/font
+let drops=[]
+
+for(let x=0;x<columns;x++) drops[x]=1
+
+function draw(){
+ctx.fillStyle="rgba(0,0,0,0.05)"
+ctx.fillRect(0,0,canvas.width,canvas.height)
+
+ctx.fillStyle="#0f0"
+ctx.font=font+"px monospace"
+
+for(let i=0;i<drops.length;i++){
+let text=letters[Math.floor(Math.random()*letters.length)]
+ctx.fillText(text,i*font,drops[i]*font)
+
+if(drops[i]*font>canvas.height && Math.random()>0.975)
+drops[i]=0
+
+drops[i]++
+}
+}
+setInterval(draw,33)
+
+/* TERMINAL */
+function terminal(e){
+if(e.key==="Enter"){
+let input=document.getElementById("cmd")
+let out=document.getElementById("out")
+
+let cmd=input.value
+out.innerHTML+="<div>> "+cmd+"</div>"
+
+switch(cmd){
+case "help":
+out.innerHTML+="<div>help about scan clear</div>"
+break
+case "about":
+out.innerHTML+="<div>Cyber System v1.0</div>"
+break
+case "scan":
+nav('scan')
+startScan()
+break
+case "clear":
+out.innerHTML=""
+break
+default:
+out.innerHTML+="<div>unknown command</div>"
+}
+
+input.value=""
+out.scrollTop=out.scrollHeight
+}
+}
+
+/* FAKE SCAN */
+function startScan(){
+let log=document.getElementById("scanlog")
+log.innerHTML=""
+let steps=[
+"Initializing...",
+"Scanning ports...",
+"Bypassing firewall...",
+"Injecting payload...",
+"Access granted"
+]
+
+let i=0
+let interval=setInterval(()=>{
+log.innerHTML+="<div>"+steps[i]+"</div>"
+i++
+if(i>=steps.length) clearInterval(interval)
+},800)
+}
+
+/* STATUS */
+setInterval(()=>{
+let s=document.getElementById("status")
+let states=["CONNECTED","SECURE","MONITORING","ACTIVE"]
+s.innerText=states[Math.floor(Math.random()*states.length)]
+},2000)
+
+</script>
+
+</body>
+</html>
             <a href="#contact">Kontak</a>
         </nav>
     </header>
