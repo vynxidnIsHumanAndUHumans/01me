@@ -23,39 +23,40 @@ canvas{
     opacity:0.15;
 }
 
-/* CENTER */
+/* CONTAINER */
 .container{
     position:absolute;
     top:50%;
     left:50%;
     transform:translate(-50%, -50%);
-    text-align:center;
-    width:90%;
+    width:95%;
+    max-width:800px;
 }
 
-/* TEXT */
-h1{font-size:clamp(24px,5vw,40px);margin:10px}
-h2{font-size:clamp(14px,3vw,20px);margin:10px;opacity:0.8}
-p{font-size:clamp(12px,2.8vw,16px);max-width:90%;margin:auto;opacity:0.7}
-
-/* MUSIC BUTTON */
-.music-btn{
-    position:fixed;
-    top:15px;
-    right:15px;
-    background:rgba(0,0,0,0.5);
+/* TERMINAL BOX */
+.terminal-box{
     border:1px solid #00ffcc;
-    color:#00ffcc;
-    padding:8px 12px;
-    cursor:pointer;
-    border-radius:8px;
-    font-size:18px;
-    z-index:10;
-    transition:0.3s;
+    border-radius:10px;
+    padding:15px;
+    background:rgba(0,0,0,0.6);
+    box-shadow:0 0 15px #00ffcc33;
 }
-.music-btn:hover{
+
+/* TERMINAL TEXT */
+#terminal{
+    font-size:clamp(12px,2.5vw,15px);
+    white-space:pre-wrap;
+    overflow-y:auto;
+    max-height:60vh;
+    line-height:1.5;
+}
+
+/* SCROLL STYLE */
+#terminal::-webkit-scrollbar{
+    width:5px;
+}
+#terminal::-webkit-scrollbar-thumb{
     background:#00ffcc;
-    color:black;
 }
 </style>
 </head>
@@ -69,425 +70,16 @@ p{font-size:clamp(12px,2.8vw,16px);max-width:90%;margin:auto;opacity:0.7}
     <source src="video.webm" type="audio/webm">
 </audio>
 
-<!-- BUTTON -->
-<div class="music-btn" id="musicBtn">🔇</div>
-
 <div class="container">
-    <h1 id="line1"></h1>
-    <h2 id="line2"></h2>
-    <p id="line3"></p>
+    <div class="terminal-box">
+        <div id="terminal"></div>
+    </div>
 </div>
-<pre>
-    1. Imam Syafi'i: Debat Logika Melawan Ateis
-
-Walaupun beliau adalah Imam Mazhab, Imam Syafi'i dikenal memiliki derajat kewalian yang tinggi. Suatu ketika, sekelompok orang yang tidak percaya Tuhan (ateis) menantangnya untuk membuktikan keberadaan Sang Pencipta hanya dengan satu bukti sederhana.
-
-Logika Cerdas Imam Syafi'i:
-Beliau tidak menggunakan rumus rumit, melainkan mengambil selembar daun murbei. Beliau berkata:
-
-    "Lihatlah daun ini. Rasanya satu, bentuknya satu. Tapi, jika dimakan ulat sutra, ia keluar jadi sutra yang halus. Jika dimakan lebah, ia keluar jadi madu yang manis. Jika dimakan kambing, ia keluar jadi kotoran. Dan jika dimakan rusa, ia keluar jadi minyak kesturi yang wangi. Siapa yang mengubah satu bahan yang sama menjadi hasil yang berbeda-beda ini kalau bukan Sang Pencipta?"
-
-Para penantangnya pun terdiam karena logika "sebab-akibat" yang sangat jenius namun mudah dicerna ini.
-2. Syekh Junayd Al-Baghdadi: Ujian "Burung" yang Rahasia
-
-Syekh Junayd ingin menguji murid-muridnya untuk melihat siapa yang paling cerdas secara spiritual. Beliau memberikan seekor burung kepada setiap murid dan berkata: "Sembelihlah burung ini di tempat di mana tidak ada satu pun yang melihatmu."
-
-Satu per satu murid kembali. Ada yang menyembelih di gua gelap, di balik tembok, atau di dalam hutan. Namun, satu murid favorit beliau kembali dengan burung yang masih hidup.
-
-Kecerdasan Sang Murid:
-Murid-murid lain menertawakannya, tapi Syekh Junayd bertanya, "Kenapa kau tidak menyembelihnya?"
-Murid itu menjawab: "Guru, Engkau memerintahkanku menyembelih di tempat yang tidak ada seorang pun melihat. Namun, ke mana pun aku pergi, aku merasa Allah selalu melihatku. Tidak ada satu tempat pun yang tersembunyi dari-Nya."
-
-Syekh Junayd tersenyum. Inilah kecerdasan Muraqabah (merasa diawasi Tuhan), yang lebih tinggi nilainya daripada sekadar menjalankan perintah secara tekstual.
-3. Abu Nawas: Menghitung Bintang di Langit
-
-Abu Nawas sering dianggap sebagai wali yang menyamar jadi orang lucu (Majdzub). Suatu hari, Raja Harun Ar-Rasyid yang ingin menguji kecerdasannya bertanya: "Abu Nawas, berapa jumlah bintang di langit?"
-
-Jawaban Cerdas Abu Nawas:
-Tanpa ragu, ia menunjuk seekor keledai dan berkata, "Jumlah bintang di langit sama dengan jumlah bulu yang ada di tubuh keledai ini. Jika Baginda tidak percaya, silakan hitung sendiri."
-
-Raja tertawa dan berkata, "Bagaimana aku bisa menghitung bulu keledai?"
-Abu Nawas membalas, "Lalu bagaimana Baginda menyuruhku menghitung bintang di langit?" Ia menggunakan logika keseimbangan pertanyaan untuk menunjukkan bahwa ada hal-hal yang hanya milik ranah Tuhan.
-4. Bahlul dan Istana di Surga
-
-Bahlul adalah seorang wali yang sering bertingkah seperti orang gila di Baghdad. Suatu hari, ia duduk di pinggir jalan membuat rumah-rumahan dari tanah. Istri Raja, Zubaidah, lewat dan bertanya, "Bahlul, apa yang kau buat?"
-Bahlul menjawab, "Aku sedang membangun istana di surga untuk dijual."
-
-Zubaidah yang beriman bertanya harganya, dan Bahlul menyebut angka yang sangat murah. Zubaidah membayarnya. Malamnya, Raja bermimpi melihat istana megah di surga atas nama istrinya.
-
-Besoknya, Raja mendatangi Bahlul dan ingin membeli istana juga. Bahlul berkata, "Boleh, tapi harganya seluruh kekayaan kerajaanmu!"
-Raja protes, "Kenapa untuk istriku murah sekali?"
-Bahlul menjawab cerdas: "Istrimu membeli sebelum melihat buktinya (dengan iman), sedangkan engkau ingin membeli setelah melihat buktinya (dengan logika dunia)."
-5. Syekh Siti Jenar vs Sembilan Wali (Logika Kehadiran)
-
-Dalam sejarah nusantara, ada perdebatan cerdas tentang hakikat "kehadiran" Tuhan. Saat para wali memanggil Syekh Siti Jenar untuk sidang, utusan berkata: "Syekh, dipanggil para Wali ke masjid."
-Syekh menjawab: "Siti Jenar tidak ada, yang ada hanya Gusti (Tuhan)."
-
-Utusan kembali dan melapor. Para Wali yang juga cerdas membalas: "Kalau begitu, katakan bahwa Tuhan dipanggil ke masjid."
-Syekh Siti Jenar pun datang. Mengapa? Karena secara logika kewalian, jika ia mengaku dirinya "larut" dalam Tuhan, maka ia tidak boleh membantah panggilan yang ditujukan kepada "Zat" tersebut. Ini adalah adu logika makrifat yang sangat dalam.
-
-1. Imam Abu Hanifah: Mencari Pencuri di Dalam Masjid
-
-Imam Abu Hanifah dikenal sebagai "Imam Logika" karena kemampuannya memecahkan masalah pelik dengan cara yang sangat cerdik.
-
-Suatu hari, ada seorang pria yang lupa di mana ia mengubur uangnya. Ia sudah mencari ke mana-mana tapi tetap tidak ingat. Ia mendatangi Abu Hanifah untuk meminta bantuan (padahal ini masalah pribadi, bukan masalah agama).
-
-Solusi Cerdas:
-Abu Hanifah tidak memberikan mantra, melainkan berkata: "Malam ini, berdirilah untuk salat sampai subuh." Pria itu pun mulai salat. Baru saja rakaat pertama, tiba-tiba ia teringat persis di mana uang itu dikubur.
-
-Esoknya ia berterima kasih, dan Abu Hanifah tersenyum sambil berkata: "Aku sudah menduga bahwa Iblis tidak akan membiarkanmu tenang dalam salatmu, maka dia akan membantumu mengingat duniamu agar engkau segera membatalkan salatmu."
-2. Imam Malik: Menjawab "Tidak Tahu"
-
-Ini adalah kisah tentang kecerdasan integritas. Suatu kali, seorang pria datang dari tempat yang sangat jauh (perjalanan berbulan-bulan) hanya untuk mengajukan 40 pertanyaan kepada Imam Malik di Madinah.
-
-Imam Malik mendengarkan semua pertanyaan itu, lalu menjawab 36 di antaranya dengan: "Aku tidak tahu."
-
-Pria itu kaget dan bertanya, "Lalu apa yang harus kukatakan kepada orang-orang di kampungku yang menganggapmu ulama paling cerdas di dunia?"
-Imam Malik menjawab dengan tenang: "Katakan kepada mereka bahwa Malik tidak tahu."
-
-Logikanya: Kecerdasan tertinggi seorang ulama adalah mengakui keterbatasan ilmunya agar tidak menyesatkan orang lain. Menjawab "tidak tahu" justru menyelamatkan ribuan nyawa dari fatwa yang salah.
-3. Syekh Nawawi Al-Bantani: Menulis di Tengah Kegelapan
-
-Ulama asal Banten yang menjadi Imam di Masjidil Haram ini punya kisah kecerdasan yang luar biasa saat menulis kitab.
-
-Suatu malam saat sedang menulis, lampu minyaknya padam karena kehabisan bahan bakar. Namun, semangat menulis beliau sedang memuncak. Konon, dengan izin Allah, jempol kakinya mengeluarkan cahaya terang layaknya lampu, sehingga beliau tetap bisa melanjutkan menulis kitabnya hingga selesai.
-
-Ini menunjukkan bahwa kecerdasan yang dibarengi keikhlasan akan mendapatkan "fasilitas" langsung dari langit.
-4. Ibnu Abbas r.a.: Menaklukkan 6.000 Kaum Khawarij dengan Debat
-
-Ketika terjadi fitnah besar di zaman Ali bin Abi Thalib, 6.000 orang memisahkan diri (Khawarij) karena tidak setuju dengan keputusan politik. Ibnu Abbas, yang saat itu masih muda tapi sangat cerdas, meminta izin Ali untuk menemui mereka.
-
-Ibnu Abbas datang mengenakan pakaian terbaiknya. Orang Khawarij bertanya, "Kenapa kau pakai baju mewah?"
-Ibnu Abbas menjawab: "Aku melihat Rasulullah memakai pakaian yang lebih indah dari ini." (Skakmat pertama: mematahkan argumen zuhud yang kaku).
-
-Lalu ia bertanya, "Apa keberatan kalian terhadap Ali?"
-Mereka menjawab, "Ali menghapus gelar 'Amirul Mukminin' saat perjanjian."
-Ibnu Abbas membalas: "Bukankah Nabi Muhammad juga menghapus gelar 'Rasulullah' saat Perjanjian Hudaibiyah demi perdamaian? Apakah Nabi jadi bukan Nabi karena gelarnya dihapus?"
-
-Mendengar logika yang sangat presisi itu, 2.000 orang langsung tobat dan kembali ke barisan Ali bin Abi Thalib di tempat itu juga.
-5. Bonus: Kecerdasan Ibu Imam Syafi'i
-
-Kecerdasan ulama biasanya turun dari ibunya. Ibu Imam Syafi'i adalah wanita yang sangat cerdas. Suatu hari, ada dua orang saksi yang memberikan keterangan berbeda di pengadilan. Hakim bingung.
-
-Ibu Imam Syafi'i kemudian memberikan saran berdasarkan Al-Qur'an bahwa jika dua saksi tidak sepakat, maka dipanggillah saksi lain untuk menguatkan salah satunya. Namun cara beliau menyampaikan argumen hukum begitu sistematis hingga hakim tersebut takjub dan berkata bahwa wanita ini memiliki pemahaman hukum setingkat ulama besar.
-
-1. KEKAYAAN: Abdurrahman bin Auf (Tangan Emas)
-
-Abdurrahman bin Auf adalah sahabat yang "dikutuk" menjadi kaya. Beliau pernah berkata, "Kalau aku mengangkat batu, rasanya aku akan menemukan emas di bawahnya."
-
-    Kisah Cerdasnya: Saat hijrah ke Madinah, beliau datang tanpa harta sepeser pun. Sahabat Ansar menawarkan setengah hartanya, tapi Abdurrahman menolak dengan sopan dan hanya bertanya: "Tunjukkan saja di mana letak pasarnya."
-
-    Gongnya: Dalam waktu singkat, beliau menguasai pasar Madinah. Saat beliau wafat, saking banyaknya emas yang ditinggalkan, emas tersebut harus dipotong-potong dengan kapak sampai tangan para petugas kelelahan. Tapi hebatnya, beliau pernah menyumbangkan 700 unta penuh muatan barang untuk penduduk Madinah dalam satu waktu!
-
-2. KEBERANIAN: Ali bin Abi Thalib di Perang Khaibar
-
-Benteng Khaibar adalah benteng Yahudi yang sangat kuat dan sulit ditembus. Banyak pasukan Muslim mencoba tapi gagal. Nabi SAW kemudian bersabda: "Besok aku akan berikan panji ini kepada orang yang mencintai Allah dan Rasul-Nya, dan Allah serta Rasul-Nya mencintainya."
-
-    Aksinya: Esoknya, Ali bin Abi Thalib maju. Di tengah pertempuran, perisai Ali terlepas. Tanpa ragu, beliau mencabut pintu benteng yang sangat berat dengan tangan kosong dan menjadikannya perisai.
-
-    Faktanya: Setelah perang selesai, delapan orang sahabat mencoba mengangkat pintu tersebut bersama-sama, tapi mereka tidak mampu menggerakkannya. Itu adalah perpaduan antara keberanian dan kekuatan mukjizat.
-
-3. TAKTIK PERANG: Khalid bin Walid di Perang Mut'ah
-
-Dalam Perang Mut'ah, 3.000 pasukan Muslim harus melawan 200.000 pasukan Romawi. Secara logika, ini adalah bunuh diri. Khalid bin Walid kemudian ditunjuk menjadi komandan di tengah gentingnya situasi.
-
-    Taktik "Psikologi": Khalid memerintahkan pasukan di barisan belakang untuk bertukar posisi dengan barisan depan, dan pasukan sayap kiri bertukar dengan sayap kanan pada malam hari. Ia juga menyuruh pasukan untuk terus menghentakkan kaki agar debu mengepul hebat.
-
-    Gongnya: Esok pagi, pasukan Romawi melihat wajah-wajah baru dan debu yang membumbung. Mereka mengira bantuan pasukan Muslim dari Madinah telah datang. Nyali pasukan Romawi menciut, dan Khalid berhasil memukul mundur mereka dan membawa pulang pasukan Muslim dengan kerugian minimal.
-
-4. KECERDASAN WALI: Ibrahim bin Adham & Si Pencuri
-
-Ibrahim bin Adham adalah seorang raja yang meninggalkan tahtanya untuk menjadi wali sufi. Suatu malam, rumahnya kerampokan.
-
-    Aksi "Nyeleneh": Bukannya teriak maling, Ibrahim malah membantu si pencuri mengumpulkan barang-barangnya. Saat si pencuri hendak pergi, Ibrahim berkata, "Tunggu, kau belum mengambil air wudu dan salat dua rakaat. Kerjamu ini berat, kau butuh bantuan Tuhan agar tidak ketahuan."
-
-    Gongnya: Si pencuri bingung, tapi karena wibawa Ibrahim, ia menurut. Setelah salat, hatinya mendadak bergetar dan ia menangis lalu bertaubat. Ibrahim menggunakan kecerdasan emosional untuk "merampok" balik hati si pencuri agar kembali ke jalan Allah.
-
-5. KOMBINASI TAKTIK & KEBERANIAN: Amr bin Ash (Sang Genius Arab)
-
-Amr bin Ash adalah orang yang menaklukkan Mesir. Beliau dikenal sangat licin dan cerdik.
-
-    Kisahnya: Saat terkepung di dalam benteng musuh, Amr menyamar menjadi utusan perdamaian untuk bertemu komandan musuh. Komandan musuh sadar ini adalah Amr (sang pemimpin) dan memberi kode kepada pengawalnya untuk membunuh Amr saat ia keluar.
-
-    Taktik Keluar: Amr yang menyadari gelagat itu berkata, "Aku punya 10 teman di luar yang juga pemimpin. Bagaimana kalau aku bawa mereka ke sini agar kita bisa sepakat bersama?" Komandan musuh setuju (karena ingin membunuh 10 pemimpin sekaligus). Amr pun dilepaskan, dan tentu saja ia tidak pernah kembali lagi ke sana kecuali dengan pasukan penuh untuk menang!
-
-6. WALI NUSANTARA: Sunan Kalijaga (Taktik Budaya)
-
-Sunan Kalijaga adalah contoh wali yang menggunakan kecerdasan antropologi. Saat wali lain kesulitan menyebarkan Islam karena adat Hindu-Budha yang kuat, beliau menggunakan Wayang Kulit.
-
-    Taktik: Beliau tidak melarang wayang, tapi mengubah ceritanya. Tokoh "Jimat Kalimasada" sebenarnya adalah filosofi dari "Kalimat Syahadat". Rakyat yang ingin menonton tidak dipungut biaya, cukup membayar dengan membaca dua kalimat syahadat. Inilah taktik dakwah tanpa perang yang paling cerdas di tanah Jawa.
-    
-1. Doa Syekh Abdul Qadir Al-Jailani: "Menantang" Takdir
-
-Ada sebuah kisah tentang seorang murid Syekh Abdul Qadir yang ditakdirkan meninggal dalam keadaan buruk (su'ul khatimah) menurut catatan di Lauhul Mahfuz.
-
-Syekh Abdul Qadir kemudian berdoa dengan logika yang sangat cerdas:
-
-    "Ya Allah, jika Engkau menghapus namaku dari daftar kekasih-Mu, aku tidak akan protes karena itu hak-Mu. Tapi jika Engkau membiarkan muridku celaka, maka orang-orang akan berkata bahwa Abdul Qadir tidak mampu mendidik muridnya. Jagalah nama-Mu di dalam diriku dengan menyelamatkan dia."
-
-Beliau menggunakan argumen "reputasi" guru sebagai bentuk tanggung jawab spiritual. Allah pun mengabulkan doanya dan mengubah takdir si murid menjadi ahli surga.
-2. Doa Imam Syafi'i: Merayu dengan Pengakuan
-
-Imam Syafi'i memiliki kecerdasan bahasa yang luar biasa. Salah satu doanya yang paling cerdas (sering dijadikan syair I'tiraf) adalah cara beliau memposisikan diri di hadapan Allah:
-
-    "Ilahi, aku tidak layak masuk surga-Mu, tapi aku pun tidak kuat menahan api neraka-Mu."
-
-Logika Cerdasnya: Ini adalah posisi "skakmat" secara diplomatis. Beliau seolah berkata: "Kalau ke surga aku kurang amal, kalau ke neraka aku tidak kuat. Maka satu-satunya jalan hanyalah Ampunan-Mu." Doa ini memaksa turunnya rahmat Allah melalui pengakuan kelemahan yang total.
-3. Doa Wali Majdzub (Bahlul) Tentang "Kunci Surga"
-
-Suatu hari Khalifah Harun Ar-Rasyid melihat Bahlul sedang mengais debu di kuburan. Sang Khalifah bertanya, "Apa yang kau lakukan?" Bahlul menjawab, "Aku sedang menghitung penduduk surga."
-
-Khalifah lalu minta didoakan agar masuk surga. Bahlul berdoa dengan sangat singkat namun cerdas:
-
-    "Ya Allah, janganlah Engkau masukkan Harun ke surga jika itu hanya akan membuat surga menjadi sempit bagi orang miskin."
-
-Maknanya: Doa ini adalah teguran cerdas agar sang Khalifah memperbaiki kepemimpinannya di dunia agar layak masuk ke surga tanpa membawa beban dosa rakyatnya.
-4. Doa Syekh Abu Bakar bin Salim: Doa "Keamanan"
-
-Beliau adalah seorang wali besar dari Yaman. Beliau memiliki doa yang sangat cerdas untuk melindungi keturunannya dan para pecintanya. Beliau berdoa agar Allah memberikan "keamanan" kepada siapa pun yang menyebut namanya atau menghadiri majelisnya.
-
-Logika Cerdasnya: Beliau menjadikan dirinya sebagai "wasilah" (perantara) yang sah. Beliau tahu bahwa Allah mencintai hamba-Nya yang saleh, maka beliau "memanfaatkan" kasih sayang Allah itu untuk memayungi orang banyak. Hingga kini, doa Fakhrul Wujud beliau masih dibaca jutaan orang.
-5. Kisah Wali yang Berdoa Menggunakan "Aib"
-
-Ada seorang wali yang melihat kemarau panjang. Ia berdiri di tengah lapangan dan berdoa:
-
-    "Ya Allah, penduduk negeri ini berbuat dosa, itu benar. Tapi bukankah Engkau Maha Pemaaf? Jika Engkau tidak menurunkan hujan, maka setan akan tertawa karena merasa menang telah menjerumuskan kami. Jangan biarkan musuh-Mu (setan) tertawa melihat kami menderita."
-
-Gongnya: Ia tidak meminta hujan demi perut manusia, tapi demi "harga diri" hamba beriman di hadapan setan. Sesaat kemudian, langit yang cerah langsung berubah mendung dan hujan turun dengan lebat.
-6. Doa Habib Sholeh Tanggul (Wali dari Jawa Timur)
-
-Habib Sholeh dikenal memiliki doa yang secepat kilat dikabulkan. Suatu kali ada orang yang minta didoakan agar punya anak setelah puluhan tahun menunggu.
-
-Beliau tidak hanya berdoa "Ya Allah berilah dia anak," tapi beliau mengambil sebotol air dan berkata dengan nada "memerintah" karena kedekatannya dengan Allah:
-
-    "Ya Allah, dia ini tamuku, dan tamu adalah titipan-Mu. Aku malu kalau tamuku pulang dengan tangan hampa."
-
-Beliau menggunakan hak memuliakan tamu dalam syariat untuk mendesak dikabulkannya doa. Hasilnya, orang tersebut segera dikaruniai keturunan.
-
-1. Doa "Logika Malu" (Syekh Abu al-Hasan asy-Syadzili)
-
-Suatu hari, beliau berdoa dengan kalimat yang sangat cerdas di hadapan Allah:
-
-    "Ya Allah, jika aku bermaksiat kepada-Mu, itu karena aku mengikuti kecintaanku pada-Mu. Karena aku tahu, Engkau adalah Zat yang sangat suka memberikan ampunan. Dan tidak ada cara bagiku untuk mendapatkan ampunan-Mu kecuali jika aku memiliki dosa untuk diampuni."
-
-Analisis Kecerdasannya:
-Beliau tidak sedang meremehkan dosa, tapi beliau sedang "memaksa" turunnya sifat Al-Ghaffar (Maha Pengampun) milik Allah. Beliau memposisikan diri sebagai hamba yang "memberi kesempatan" bagi sifat Allah yang paling mulia (Ampunan) untuk bekerja. Allah sangat menyukai hamba yang "manja" namun cerdas dalam mengakui sifat-sifat Tuhan-Nya.
-2. Doa "Asuransi" Syekh Abdul Qadir Al-Jailani
-
-Syekh Abdul Qadir pernah ditanya mengapa beliau sangat yakin bahwa murid-muridnya akan selamat dunia-akhirat. Beliau menjawab bahwa beliau telah membuat sebuah "perjanjian doa" yang cerdas dengan Allah:
-
-    "Ya Allah, Engkau telah berjanji bahwa tangan-Mu berada di atas tangan-ku (kekuasaan-Mu menaungi ketaatanku). Maka aku memohon, jangan biarkan ada satu pun orang yang pernah memandang wajahku, atau duduk di majelisku, atau menyebut namaku dengan cinta, masuk ke dalam api neraka-Mu."
-
-Analisis Kecerdasannya:
-Beliau menggunakan kedudukannya sebagai kekasih Allah untuk "mengasuransikan" semua orang yang ada di sekitarnya. Ini adalah kecerdasan dalam menggunakan jatah syafaat (pemberian pertolongan) yang Allah berikan kepada para wali.
-3. Doa Wali yang "Menghukum" Dirinya Sendiri (Ibrahim bin Adham)
-
-Ibrahim bin Adham pernah melewati seseorang yang sedang mabuk. Beliau tidak menghardiknya, melainkan mengusap mulut orang itu dengan air sambil berdoa dengan cerdas:
-
-    "Ya Allah, mulut ini adalah tempat di mana hamba-Mu ini menyebut nama-Mu (saat sadar). Janganlah Engkau biarkan tempat yang pernah menyebut nama-Mu ini dikotori oleh api neraka."
-
-Analisis Kecerdasannya:
-Doa ini cerdas karena ia mengambil satu sisi baik dari orang bermaksiat (yaitu pernah menyebut nama Allah) untuk menutupi seluruh kesalahan lainnya. Allah pun langsung memberikan hidayah kepada pemabuk itu saat itu juga.
-4. Doa "Logika Tamu" (Habib Sholeh Tanggul)
-
-Habib Sholeh Tanggul (seorang wali besar di Jawa Timur) punya gaya berdoa yang sangat taktis. Jika beliau ingin membantu orang lain, beliau sering berkata:
-
-    "Ya Allah, orang ini adalah tamu di rumah-Mu (bumi-Mu) dan saat ini sedang bertamu kepadaku. Engkau telah memerintahkan kami untuk memuliakan tamu. Maka bagaimana mungkin Engkau, Sang Pemilik Alam, tidak memuliakan tamu-Mu yang sedang kesulitan ini?"
-
-Analisis Kecerdasannya:
-Beliau menggunakan Aturan Syariat tentang "Memuliakan Tamu" untuk mendesak Allah agar memberikan pertolongan. Beliau seolah-olah berkata: "Jika manusia saja wajib muliakan tamu, apalagi Engkau yang Maha Mulia."
-5. Doa Wali Majdzub Mengenai "Dunia"
-
-Ada seorang wali yang berdoa sambil menunjuk ke tanah:
-
-    "Ya Allah, dunia ini hanyalah seberat sayap nyamuk di sisi-Mu. Jika aku meminta dunia yang seberat sayap nyamuk ini saja Engkau tidak beri, lalu untuk apa Engkau ciptakan aku sebagai hamba-Mu yang paling mulia (manusia)?"
-
-Analisis Kecerdasannya:
-Ia menggunakan perbandingan antara keagungan manusia dan kerendahan dunia. Ia membuat dunia terlihat sangat kecil sehingga "terasa tidak berharga" bagi Allah untuk menahan-nahan rezeki bagi hamba-Nya.
-
-1. Doa "Logika Penitipan" (Imam Abu Hanifah)
-
-Suatu hari, ada seorang pemuda yang sangat nakal dan sering maksiat meninggal dunia. Penduduk kota tidak ada yang mau menyalatinya. Namun, Imam Abu Hanifah justru datang dan menyalatinya dengan sangat khusyuk.
-
-Orang-orang bertanya, "Mengapa engkau menyalati pemuda yang buruk ini?"
-
-Imam Abu Hanifah menjawab bahwa ia mendengar pemuda itu sebelum wafat berdoa dengan kalimat yang sangat cerdas:
-
-    "Ya Allah, jika seorang tamu datang ke rumah seorang pemurah, maka sang pemurah akan merasa malu untuk menanyakan dosa-dosa tamunya sebelum memberinya makan. Sekarang, aku adalah tamu-Mu, dan Engkau adalah Zat yang Paling Pemurah. Maka perlakukanlah aku sebagaimana layaknya seorang tamu."
-
-Imam Abu Hanifah berkata, "Bagaimana mungkin aku tidak menyalati orang yang tahu cara 'mengunci' rahmat Allah dengan logika kemuliaan tamu?"
-2. Doa "Memanfaatkan Nama" (Wali dari Baghdad)
-
-Ada seorang wali yang sedang dalam kesulitan besar. Ia berdoa dengan kalimat yang sangat unik:
-
-    "Ya Allah, jika Engkau menolongku, itu tidak akan menambah keagungan-Mu karena Engkau sudah Maha Agung. Dan jika Engkau menyiksaku, itu tidak akan menambah kekuasaan-Mu karena Engkau sudah Maha Kuasa. Namun, jika Engkau memaafkanku, maka nama-Mu sebagai Al-Ghaffar (Maha Pengampun) akan semakin bersinar di hati hamba-hamba-Mu."
-
-Kecerdasannya: Wali ini tidak meminta demi kepentingannya sendiri, tapi ia meminta agar Sifat Mulia Allah semakin dikenal. Allah sangat "suka" jika hamba-Nya memperhatikan keagungan nama-Nya saat meminta.
-3. Doa "Tukar Guling" (Ibrahim bin Adham)
-
-Ibrahim bin Adham pernah bertemu seorang laki-laki yang sangat sedih karena kemiskinannya. Ibrahim berkata:
-"Apakah kamu mau menukar rasa sedihmu itu dengan 10.000 dinar (emas)?"
-Orang itu menjawab, "Tentu saja!"
-
-Ibrahim kemudian berdoa kepada Allah dengan cerdas:
-
-    "Ya Allah, hamba-Mu ini menganggap rasa sedih yang Engkau berikan (sebagai pembersih dosa) harganya lebih murah daripada kepingan emas. Jika dia tidak tahu berharganya rasa sedih di jalan-Mu, maka berilah dia emas agar dia senang, karena Engkau tidak butuh pada orang yang tidak menghargai pemberian-Mu (berupa ujian)."
-
-Seketika itu juga, orang tersebut mendapatkan rezeki yang tidak disangka-sangka. Ibrahim menggunakan logika sindiran yang indah kepada Allah untuk menolong orang tersebut.
-4. Doa "Cermin" (Syekh Maruf Al-Karkhi)
-
-Beliau pernah berdoa saat melihat orang-orang bermaksiat di sungai:
-
-    "Ya Allah, sebagaimana Engkau telah membuat mereka senang di dunia dengan kemaksiatan ini, maka aku mohon buatlah mereka senang di akhirat dengan tobat mereka."
-
-Kecerdasannya: Beliau tidak mengutuk ("Ya Allah hancurkan mereka"), tapi beliau mengambil kata "Senang". Jika mereka senang dengan dosa, maka mintalah agar mereka "Senang dengan Pahala". Ini adalah doa yang paling cerdas untuk mengubah musuh menjadi kawan.
-5. Doa "Anak Kecil" (Wali Majdzub)
-
-Seorang wali melihat anak kecil yang sedang menangis karena takut pada ibunya yang marah. Sang ibu kemudian luluh dan memeluk anak itu. Sang wali langsung menengadah ke langit dan berdoa:
-
-    "Ya Allah, aku melihat ibu ini memaafkan anaknya hanya karena si anak tidak punya tempat lari selain kepada ibunya. Maka lihatlah aku, aku pun tidak punya tempat lari selain kepada-Mu. Jika ibu yang lemah saja bisa luluh, apalagi Engkau yang Maha Pengasih?"
-
-Kecerdasannya: Ia menggunakan analogi kasih sayang makhluk untuk mengetuk pintu pencipta kasih sayang itu sendiri.
-
-1. Doa "Logika Titipan" (Habib Ali Al-Habsyi)
-
-Habib Ali Al-Habsyi (penyusun Maulid Simtudduror) pernah mengajarkan cara berdoa yang sangat cerdas bagi orang yang merasa dosanya terlalu banyak untuk meminta surga.
-
-Beliau berdoa:
-
-    "Ya Allah, aku ini adalah milik-Mu. Dan surga adalah milik-Mu. Jika Engkau memasukkan milik-Mu (aku) ke dalam milik-Mu (surga), Engkau tidak akan rugi apa-apa. Tapi jika Engkau memasukkan milik-Mu (aku) ke dalam neraka, maka musuh-Mu (setan) akan senang karena berhasil merusak milik-Mu."
-
-Analisis: Beliau menggunakan logika Kepemilikan. Beliau memposisikan diri bukan sebagai peminta-minta, tapi sebagai "barang milik Allah" yang harus dijaga oleh Pemiliknya agar tidak diambil oleh musuh (setan).
-2. Kecerdasan Syekh Abu Yazid Al-Busthami dan Seekor Anjing
-
-Syekh Abu Yazid adalah wali besar yang sangat cerdas dalam memahami hakikat. Suatu hari, saat berjalan, beliau berpapasan dengan seekor anjing. Beliau mengangkat jubahnya agar tidak terkena najis anjing itu.
-
-Tiba-tiba, anjing itu seolah-olah "berbicara" melalui ilham kepada beliau:
-"Wahai Abu Yazid, jika buluku basah dan mengenai bajumu, kau cukup mencucinya dengan air dan tanah. Tapi jika kau merasa dirimu lebih mulia dariku, najis di hatimu tidak akan hilang walau dicuci dengan tujuh samudera."
-
-Aksi Cerdas Sang Wali:
-Beliau tidak marah, tapi langsung tersungkur dan berdoa:
-
-    "Ya Allah, jika makhluk-Mu yang paling hina saja (menurut pandangan manusia) bisa memberi pelajaran sedalam ini, maka muliakanlah ia karena telah membantuku membersihkan kesombonganku."
-
-Beliau menggunakan hinaan sebagai jalan tercepat untuk naik derajat di sisi Allah.
-3. Doa "Logika Keadilan" (Wali Wanita Rabiah Al-Adawiyah)
-
-Rabiah Al-Adawiyah dikenal dengan doa-doanya yang sangat tajam dan logis. Suatu malam, rumahnya kerampokan. Si pencuri mengambil barang-barang tapi tidak bisa menemukan jalan keluar, tembok seolah menutup semua sisi. Saat barang diletakkan, pintu terlihat kembali.
-
-Rabiah berdoa dengan sangat tenang:
-
-    "Ya Allah, pencuri ini berusaha mengambil hartaku saat aku tertidur. Tapi Engkau adalah Zat yang tidak pernah tidur. Jagalah milik-Mu ini (diriku), karena aku sudah pasrahkan segalanya kepada-Mu."
-
-Kecerdasannya: Beliau tidak mengutuk si pencuri, tapi beliau "melaporkan" bahwa si pencuri sedang menantang penjagaan Allah. Beliau menyerahkan urusan keamanan kepada "Satpam Terbaik" semesta alam.
-4. Doa "Meminta Ganti" (Seorang Wali yang Kehilangan Anaknya)
-
-Ada seorang wali yang anaknya meninggal dunia. Di pemakaman, orang-orang melihatnya tidak menangis, bahkan tersenyum kecil. Mereka mengira ia tidak sayang anak.
-
-Beliau kemudian berdoa di depan kubur:
-
-    "Ya Allah, Engkau telah mengambil apa yang Engkau titipkan padaku. Aku ridha karena itu milik-Mu. Namun, dalam syariat-Mu, siapa yang mengambil titipan orang lain, dia harus memberi imbalan yang lebih baik sebagai gantinya. Maka, gantilah anakku ini dengan kedekatan-Mu yang tidak akan pernah hilang."
-
-Kecerdasannya: Beliau menggunakan hukum Ganti Rugi (Kompensasi) dalam doa. Beliau tahu Allah tidak mungkin berutang kepada hamba-Nya yang sabar.
-5. Kecerdasan Wali Majdzub Mengenai Rezeki
-
-Seorang wali majdzub ditanya, "Besok kamu mau makan apa?"
-Ia menjawab dengan cerdas:
-"Hanya orang yang menganggap Allah sudah pensiun yang akan bertanya besok makan apa. Selama Allah masih hidup, Dia bertanggung jawab atas perutku karena Dia yang menciptakannya."
-
-Lalu ia berdoa:
-
-    "Ya Allah, aku tidak akan menyibukkan diri memikirkan apa yang sudah Engkau jamin (rezeki). Maka sibukkanlah aku hanya dengan apa yang Engkau perintahkan (ibadah)."
-    
-    
-    
-. Doa "Logika Nama Baik" (Syekh Abdul Wahab Asy-Sya'rani)
-
-Beliau adalah seorang wali yang sangat memperhatikan adab. Suatu ketika beliau berdoa dengan kalimat yang sangat cerdik untuk meminta ampunan:
-
-    "Ya Allah, jika Engkau mengampuniku, maka kekasih-Mu (Nabi Muhammad SAW) akan senang, dan musuh-Mu (Iblis) akan susah. Tapi jika Engkau menyiksaku, maka kekasih-Mu akan sedih dan musuh-Mu akan senang. Aku tahu Engkau lebih suka menyenangkan kekasih-Mu daripada menyenangkan musuh-Mu."
-
-Kecerdasannya: Beliau menggunakan perbandingan antara kesenangan Nabi dan kesenangan Iblis sebagai argumen agar Allah menurunkan ampunan-Nya. Ini adalah teknik "menjepit" takdir dengan sifat kasih sayang Allah.
-2. Kecerdasan Wali dan "Mangkuk yang Pecah"
-
-Ada seorang wali yang kedatangan tamu miskin. Sang wali tidak punya apa-apa kecuali sebuah mangkuk indah yang sangat mahal. Beliau sengaja menjatuhkan mangkuk itu hingga pecah di depan si miskin. Si miskin menangis karena merasa itu salahnya.
-
-Wali itu lalu berdoa:
-
-    "Ya Allah, lihatlah hamba-Mu ini, dia menangis karena merasa merugikan orang lain. Jika dia saja sedih melihat mangkuk yang pecah, bagaimana mungkin Engkau tidak sedih melihat hati hamba-Mu yang hancur karena dosa? Perbaikilah hatinya sebagaimana aku tidak mempedulikan mangkukku yang pecah."
-
-Kecerdasannya: Beliau mengorbankan hartanya hanya untuk menciptakan "momen" agar bisa merayu Allah untuk mengampuni dosa si miskin tersebut.
-3. Doa "Logika Budaya" (Sunan Kalijaga)
-
-Sunan Kalijaga dikenal sangat cerdas dalam berdakwah. Beliau pernah ditanya, kenapa beliau tidak meminta Allah langsung menghancurkan penjajah atau orang kafir saat itu. Beliau menjawab dengan doa yang menunjukkan pandangan jauh ke depan:
-
-    "Ya Allah, janganlah Engkau cabut nyawa mereka saat mereka masih membenci-Mu. Tidakkah lebih indah jika kelak dari tulang sulbi mereka lahir anak-cucu yang bersujud kepada-Mu?"
-
-Kecerdasannya: Beliau tidak meminta kemenangan instan (perang), tapi meminta kemenangan peradaban (hidayah). Inilah mengapa Islam di Nusantara berkembang tanpa pertumpahan darah yang besar.
-4. Doa "Memanfaatkan Sifat Lupa" (Wali Majdzub)
-
-Ada seorang wali yang dikenal "nyeleneh". Suatu malam ia berdiri di bawah langit dan berkata:
-
-    "Ya Allah, Engkau berfirman bahwa Engkau tidak pernah lupa. Namun, aku mohon kepada-Mu, lupakanlah segala kejahatan yang pernah aku lakukan, dan ingatlah hanya saat-saat aku menyebut nama-Mu dengan tulus."
-
-Kecerdasannya: Secara hakikat, Allah tidak mungkin lupa. Namun, maksud doa ini adalah meminta agar dosa-dosanya "dihapus" dari catatan amal seolah-olah tidak pernah terjadi (Maha Pemaaf/Al-Afuww).
-5. Kecerdasan Ibnu Arabi dan "Si Pendosa"
-
-Ibnu Arabi pernah melihat seseorang yang sangat alim tapi sombong, dan seorang pemabuk yang merasa sangat hina. Beliau kemudian berdoa:
-
-    "Ya Allah, terimalah tobat si pemabuk karena dia merasa rendah di hadapan-Mu, dan berilah ujian kepada si alim agar dia sadar bahwa ketaatannya hanyalah pemberian-Mu, bukan karena kehebatannya."
-
-Kecerdasannya: Beliau tahu bahwa rasa rendah diri di hadapan Allah lebih dicintai daripada ketaatan yang memunculkan kesombongan. Beliau berdoa agar takdir membolak-balikkan keadaan demi menyelamatkan hati keduanya.
-
-1. Doa "Logika Malu" (Syekh Abu al-Hasan asy-Syadzili)
-
-Syekh Abu al-Hasan asy-Syadzili adalah wali besar yang sangat cerdas dalam memahami sifat Allah. Suatu ketika beliau berdoa dengan kalimat yang sangat "berani" namun indah:
-
-    "Ya Allah, jika aku bermaksiat kepada-Mu, itu adalah karena aku sangat percaya pada luasnya ampunan-Mu. Jika aku tidak berdosa, lalu kepada siapa sifat Al-Ghaffar (Maha Pengampun) milik-Mu akan Engkau tunjukkan? Maka ampuni aku, agar sifat-Mu itu terbukti nyata padaku."
-
-Kecerdasannya: Beliau memposisikan dirinya sebagai "sarana" agar sifat Allah (Maha Pengampun) bisa bekerja. Beliau "merayu" Allah dengan asma-Nya sendiri.
-2. Doa "Meminta Ganti Rugi" (Imam Ahmad bin Hanbal)
-
-Imam Ahmad pernah difitnah dan disiksa dengan sangat kejam oleh penguasa pada masanya. Setelah masa sulit itu lewat, beliau berdoa dengan cara yang sangat cerdas:
-
-    "Ya Allah, penguasa itu telah menyiksaku karena ia merasa membela agama-Mu (meski ia salah). Aku telah memaafkannya. Karena jika kelak di akhirat Engkau menyiksanya karena aku, maka itu akan mengurangi kebahagiaanku di surga karena melihat sesama Muslim disiksa. Maka ampuni dia, agar kebahagiaanku sempurna."
-
-Kecerdasannya: Beliau menggunakan "kebahagiaan penduduk surga" sebagai argumen. Beliau tidak ingin dendamnya menghalangi kesempurnaan nikmat Allah di akhirat nanti.
-3. Doa "Logika Tamu" (Habib Sholeh Tanggul)
-
-Habib Sholeh Tanggul dikenal memiliki doa secepat kilat. Suatu kali seseorang datang meminta doa karena terlilit hutang besar. Habib Sholeh menatap langit dan berkata:
-
-    "Ya Allah, orang ini adalah tamu-Mu yang mampir ke rumah hamba-Mu. Engkau telah mewajibkan kami memuliakan tamu. Maka, jika aku sebagai manusia saja malu membiarkan tamuku pulang dengan tangan hampa, bagaimana mungkin Engkau—Zat yang Maha Mulia—membiarkan tamu-Mu ini pulang dengan beban hutang?"
-
-Kecerdasannya: Beliau menggunakan Hukum Syariat tentang Tamu untuk "mendesak" Allah secara halus agar memberikan pertolongan.
-4. Doa "Tukar Peran" (Syekh Junaid Al-Baghdadi)
-
-Seorang murid bertanya kepada Syekh Junaid, "Bagaimana cara agar doa kita pasti didengar?" Beliau menjawab dengan mengajarkan doa ini:
-
-    "Ya Allah, Engkau telah memilihku menjadi hamba-Mu tanpa aku meminta. Maka sekarang aku meminta kepada-Mu (surga/ampunan), maka pilihlah permintaanku sebagaimana Engkau telah memilihku."
-
-Kecerdasannya: Beliau menggunakan fakta bahwa Allah sudah memberikan "nikmat iman" (yang paling besar) secara gratis tanpa diminta. Maka, meminta hal-hal yang lebih kecil (seperti rezeki atau ampunan) seharusnya jauh lebih mudah dikabulkan.
-5. Doa "Logika Popularitas" (Seorang Wali Majdzub)
-
-Ada seorang wali yang melihat masjid sepi, lalu ia berdoa:
-
-    "Ya Allah, jika Engkau tidak memberikan rezeki dan kebahagiaan kepada orang-orang yang sujud di masjid ini, mereka akan pergi ke tempat maksiat. Jika itu terjadi, maka nama-Mu tidak akan disebut lagi di bumi ini. Jika Engkau ingin nama-Mu tetap agung, maka sejahterakanlah orang-orang yang menyembah-Mu!"
-
-Kecerdasannya: Beliau "mengancam" secara halus dengan alasan menjaga eksistensi dakwah dan asma Allah di bumi.
-6. Doa "Logika Anak" (Imam Al-Ghazali)
-
-Imam Al-Ghazali pernah mengutip sebuah logika doa yang sangat menyentuh:
-
-    "Ya Allah, seorang ibu akan tetap memberikan susu kepada anaknya meskipun si anak menendang dan menangis. Aku adalah hamba-Mu yang lebih lemah dari bayi itu, dan Engkau lebih penyayang dari ibu manapun. Maka berikanlah permintaanku meskipun aku sering membangkang."
-
-Kecerdasannya: Menggunakan analogi Kasih Sayang Ibu sebagai pembanding bahwa kasih sayang Allah jauh di atas itu.
-</pre>
 
 <script>
 
 /* ================= AUDIO ================= */
 let audio = document.getElementById("bgm")
-let btn = document.getElementById("musicBtn")
 let audioStarted = false
 
 function startAudio(){
@@ -495,65 +87,53 @@ function startAudio(){
         audioStarted = true
         audio.volume = 0.9
         audio.play().catch(()=>{})
-        btn.innerHTML = "🔊"
     }
 }
 
-/* toggle manual */
-btn.addEventListener("click", ()=>{
-    if(audio.paused){
-        audio.play()
-        btn.innerHTML = "🔊"
-    }else{
-        audio.pause()
-        btn.innerHTML = "🔇"
-    }
+/* trigger saat user interaksi */
+["click","touchstart","scroll","mousemove"].forEach(evt=>{
+    document.addEventListener(evt, startAudio, {once:true})
 })
 
+/* ================= LOAD FILE ================= */
+async function loadTextFile(){
+    try{
+        let res = await fetch("story.txt")
+        return await res.text()
+    }catch(e){
+        return "gagal load story.txt..."
+    }
+}
+
 /* ================= TYPING ================= */
-function typeText(element, text, speed, triggerIndex, callback){
+function typeTerminal(element, text, speed){
     let i = 0
 
     function typing(){
         if(i < text.length){
+            element.textContent += text.charAt(i)
 
-            element.innerHTML += text.charAt(i)
-
-            if(i === triggerIndex){
-                startAudio()
-            }
+            // auto scroll ke bawah
+            element.scrollTop = element.scrollHeight
 
             i++
             setTimeout(typing, speed)
-
-        } else if(callback){
-            callback()
         }
     }
 
     typing()
 }
 
-/* ================= LOOP ================= */
-function startTyping(){
-    line1.innerHTML=""
-    line2.innerHTML=""
-    line3.innerHTML=""
+/* ================= START ================= */
+async function start(){
+    let terminal = document.getElementById("terminal")
+    terminal.textContent = ""
 
-    typeText(line1,"Hi, I am vynxidn",60,6,()=>{
-        typeText(line2,"Welcome to my profile",50,5,()=>{
-            typeText(line3,'"tetap rendah hati guys, yang tinggi soalnya langit"',40,10,()=>{
-                setTimeout(startTyping,2000)
-            })
-        })
-    })
+    let text = await loadTextFile()
+
+    typeTerminal(terminal, text, 20)
 }
-startTyping()
-
-/* fallback trigger */
-["touchstart","scroll","mousemove"].forEach(evt=>{
-    document.addEventListener(evt,startAudio,{once:true})
-})
+start()
 
 /* ================= MATRIX ================= */
 let c=document.getElementById("matrix")
