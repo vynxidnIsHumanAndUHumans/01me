@@ -33,35 +33,29 @@ canvas{
     width:90%;
 }
 
-/* RESPONSIVE TEXT */
-h1{
-    font-size:clamp(24px, 5vw, 40px);
-    margin:10px;
-}
+/* TEXT */
+h1{font-size:clamp(24px,5vw,40px);margin:10px}
+h2{font-size:clamp(14px,3vw,20px);margin:10px;opacity:0.8}
+p{font-size:clamp(12px,2.8vw,16px);max-width:90%;margin:auto;opacity:0.7}
 
-h2{
-    font-size:clamp(14px, 3vw, 20px);
-    margin:10px;
-    opacity:0.8;
+/* MUSIC BUTTON */
+.music-btn{
+    position:fixed;
+    top:15px;
+    right:15px;
+    background:rgba(0,0,0,0.5);
+    border:1px solid #00ffcc;
+    color:#00ffcc;
+    padding:8px 12px;
+    cursor:pointer;
+    border-radius:8px;
+    font-size:18px;
+    z-index:10;
+    transition:0.3s;
 }
-
-p{
-    font-size:clamp(12px, 2.8vw, 16px);
-    max-width:90%;
-    margin:auto;
-    opacity:0.7;
-}
-
-/* CURSOR */
-.cursor{
-    display:inline-block;
-    width:10px;
+.music-btn:hover{
     background:#00ffcc;
-    animation:blink 1s infinite;
-}
-
-@keyframes blink{
-    50%{opacity:0}
+    color:black;
 }
 </style>
 </head>
@@ -75,6 +69,9 @@ p{
     <source src="video.webm" type="audio/webm">
 </audio>
 
+<!-- BUTTON -->
+<div class="music-btn" id="musicBtn">🔇</div>
+
 <div class="container">
     <h1 id="line1"></h1>
     <h2 id="line2"></h2>
@@ -85,6 +82,7 @@ p{
 
 /* ================= AUDIO ================= */
 let audio = document.getElementById("bgm")
+let btn = document.getElementById("musicBtn")
 let audioStarted = false
 
 function startAudio(){
@@ -92,8 +90,20 @@ function startAudio(){
         audioStarted = true
         audio.volume = 0.9
         audio.play().catch(()=>{})
+        btn.innerHTML = "🔊"
     }
 }
+
+/* toggle manual */
+btn.addEventListener("click", ()=>{
+    if(audio.paused){
+        audio.play()
+        btn.innerHTML = "🔊"
+    }else{
+        audio.pause()
+        btn.innerHTML = "🔇"
+    }
+})
 
 /* ================= TYPING ================= */
 function typeText(element, text, speed, triggerIndex, callback){
@@ -104,7 +114,6 @@ function typeText(element, text, speed, triggerIndex, callback){
 
             element.innerHTML += text.charAt(i)
 
-            // 🔥 trigger audio di huruf tertentu
             if(i === triggerIndex){
                 startAudio()
             }
@@ -122,30 +131,23 @@ function typeText(element, text, speed, triggerIndex, callback){
 
 /* ================= LOOP ================= */
 function startTyping(){
+    line1.innerHTML=""
+    line2.innerHTML=""
+    line3.innerHTML=""
 
-    // reset text
-    line1.innerHTML = ""
-    line2.innerHTML = ""
-    line3.innerHTML = ""
-
-    typeText(line1, "Hi, I am vynxidn", 60, 6, ()=>{
-        typeText(line2, "Welcome to my profile", 50, 5, ()=>{
-            typeText(line3, '"tetap rendah hati guys, yang tinggi soalnya langit"', 40, 10, ()=>{
-
-                // delay sebelum ulang
-                setTimeout(startTyping, 2000)
-
+    typeText(line1,"Hi, I am vynxidn",60,6,()=>{
+        typeText(line2,"Welcome to my profile",50,5,()=>{
+            typeText(line3,'"tetap rendah hati guys, yang tinggi soalnya langit"',40,10,()=>{
+                setTimeout(startTyping,2000)
             })
         })
     })
 }
-
-// mulai pertama kali
 startTyping()
 
-/* ================= BACKUP TRIGGER ================= */
-["touchstart","touchmove","scroll","mousemove","click"].forEach(evt=>{
-    document.addEventListener(evt, startAudio, {once:true})
+/* fallback trigger */
+["touchstart","scroll","mousemove"].forEach(evt=>{
+    document.addEventListener(evt,startAudio,{once:true})
 })
 
 /* ================= MATRIX ================= */
